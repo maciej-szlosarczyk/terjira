@@ -22,6 +22,10 @@ module Terjira
           build(resp)
         end
 
+        def search(options = {})
+          resource.jql(build_jql(options), max_results: 20)
+        end
+
         def delete(issue)
           api_delete("issue/#{issue.key_value}")
         end
@@ -55,10 +59,6 @@ module Terjira
           params.merge!(extract_to_fields_params(options))
           api_post "issue/#{issue.key_value}/transitions", params.to_json
           find(issue)
-        end
-
-        def search(options = {})
-          resource.jql(build_jql(options), max_results: 10)
         end
 
         private
