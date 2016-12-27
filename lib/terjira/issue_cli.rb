@@ -34,12 +34,21 @@ module Terjira
     map ls: :list
     def list
       opts = suggest_options
-      opts[:statusCategory] ||= %w(To\ Do In\ Progress) unless opts[:status]
+      opts[:statusCategory] ||= default_status_categories unless opts[:status]
       opts[:assignee] ||= current_username
       opts.delete(:assignee) if opts[:assignee] =~ /^all/i
 
       issues = client_class.all(opts)
       render_issues(issues)
+    end
+
+    desc 'jql "[QUERY]"', "Search issues with JQL"
+    long_desc <<-EXAMPLE
+      jira issue jql "project = 'IST' AND assignee = currentuser()"
+    EXAMPLE
+    def jql(*query)
+      jql = query.join(" ")
+      render_issues Client::Issue.jql(jql)
     end
 
     desc 'new', 'Create an issue'
@@ -126,6 +135,12 @@ module Terjira
     def search(*keys)
       search_term = client_class.search(summary: keys[0])
       render_issues(search_term)
+    end
+
+    no_commands do
+      def default_status_categories
+        Client::StatusCategory.all.reject { |category| category.key =~ /done/i }.map(&:name)
+      end
     end
   end
 end

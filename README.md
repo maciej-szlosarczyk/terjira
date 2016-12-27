@@ -5,11 +5,11 @@
 
 # Terjira
 
-Terjira is an interactive and easy to use command line interface (or Application) for Jira. You do not need to remember resource key or id. Terjira suggests it with interactive prompt.
+Terjira is an interactive and easy to use command line interface (or Application) for Jira. You do not need to remember the resource key or id. Terjira suggests it with an interactive prompt.
 
 Your Jira must support Rest API 2.0 and Agile Rest API 1.0
 
-## Domo
+## Demo
 [Watch full demo](https://www.youtube.com/watch?v=T0hbhaXtH-Y)
 
 [![Sample](./dev/demo.gif)](https://www.youtube.com/watch?v=T0hbhaXtH-Y)
@@ -58,6 +58,9 @@ Issue:
                                      #   default assignee option is current loggined user
                                      #   To show issues of all users(include no assignee)
                                      #   pass `--assignee ALL` option.
+  jira issue jql "[QUERY]"           # Search issues with JQL
+                                     # ex)
+                                     #   jira issue jql "project = 'TEST' AND summary ~ 'authentication'"
   jira issue [ISSUE_KEY]             # Show detail of the issue
   jira issue assign [ISSUE_KEY] ([ASSIGNEE])  # Assign the issue to user
   jira issue comment [ISSUE_KEY]     # Write comment on the issue
@@ -72,7 +75,7 @@ Issue:
 
 ## Todo
 **Contributions are welcome!**
-- [ ] Add JQL command for find issues
+- [x] Add JQL command for find issues
 - [ ] Manage worklog and estimate of issues
 - [ ] Manage component and version of issues
 - [ ] Track history of transitions
