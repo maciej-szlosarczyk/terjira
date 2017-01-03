@@ -70,6 +70,10 @@ Issue:
   jira issue open [ISSUE_KEY]        # Open browser
   jira issue take [ISSUE_KEY]        # Assign the issue to self
   jira issue trans [ISSUE_KEY] ([STATUS])     # Do transition
+  jira issue search [SUMMARY]        # Search issues by summary
+                                     # ex)
+                                     # jira issue search "CRM events"
+                                     # displays all issues for which the summary contains "CRM events"
 
 ```
 
